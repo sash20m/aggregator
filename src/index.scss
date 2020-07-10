@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  &__search-area {
+    display: flex;
+    width: 100%;
+    background-color: #f5f8fb;
+    height: 93vh;
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+
+  &__search-area-small {
+    display: flex;
+    width: 100%;
+    background-color: #f5f8fb;
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+}

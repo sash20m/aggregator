@@ -1,0 +1,47 @@
+.pagination {
+    &__arrow-btn {
+        width: 30px;
+        height: 30px;
+        color: white;
+        background-color: #467bbd;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        margin: 3px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__page-btn {
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        color: #467bbd;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        margin: 3px;
+        border: 1px solid #9aabc2;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &--active {
+            width: 30px;
+            height: 30px;
+            background-color: #467bbd;
+            color: white;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            margin: 3px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
