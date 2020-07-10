@@ -1,30 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Companies Aggregator App
 
-## Getting Started
+You need to create an application that allows to user search companies and show companies information. 
 
-First, run the development server:
+## Technologies:
+1. [ESLint + Prettier](https://github.com/ebs-integrator/ebs-fe-intership-test-1)
+2. NextJS
+3. React
+4. React Hooks
+5. Typescript
+6. Axios
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Todo:
+### Markup:
+1. Create main page when user will be able to search companies ([design](https://prnt.sc/t4a9ou), [design 2](https://prnt.sc/t4aaxw))
+2. Create page with found companies ([design](https://prnt.sc/t4abwy))
+3. Create page with company's profile ([design](https://prnt.sc/t4ad0c))
+4. Make it mobile friendly (responsive)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Business logic:
+1. Search companies using [https://app.informer.md/api/public/search?page=1&per_page=5&company_name=**INPUT-VALUE**](https://app.informer.md/api/public/search?company_name=enterprise&page=1&per_page=5)
+2. Show all found companies [https://app.informer.md/api/public/search?page=**CURRENT_PAGE**&company_name=**INPUT_VALUE**](https://app.informer.md/api/public/search?per_page=25&page=1)
+3. Show company's profile [https://app.informer.md/api/public/company?slug=**COMPANY_SLUG**](https://app.informer.md/api/public/company?slug=oilauto-lux)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Design Source](https://informer.md/en)
