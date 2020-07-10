@@ -15,6 +15,10 @@
         margin-top: 30px;
         margin-bottom: 30px;
 
+        @media only screen and (max-width: 420px) {
+            margin-left: 0;
+        }
+
     }
 
     &__info {
@@ -24,6 +28,7 @@
             font-size: 2em;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             margin-bottom: 10px;
+
         }
 
         &__industry {
@@ -38,10 +43,14 @@
 .company-info {
     display: flex;
     width: 100%;
-    height: 80vh;
     background-color: rgb(241, 245, 246);
     align-items: center;
     flex-direction: column;
+    height: 100vh;
+
+    @media only screen and (max-width: 485px) {
+        height: 112vh;
+    }
 
     &__header-info {
         display: flex;
@@ -51,6 +60,12 @@
         font-size: 1.3em;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
+        @media only screen and (max-width: 700px) {
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
         &__item {
             display: flex;
             flex-direction: column;
@@ -59,6 +74,10 @@
             background-color: white;
             justify-content: center;
             border: 1px solid rgb(207, 207, 207);
+
+            @media only screen and (max-width: 700px) {
+                width: 90%;
+            }
 
             &__key {
                 color: rgb(103, 103, 104);
@@ -80,6 +99,11 @@
                 justify-content: center;
                 border: 1px solid rgb(207, 207, 207);
                 border-radius: 7px 0 0 7px;
+
+                @media only screen and (max-width: 700px) {
+                    width: 90%;
+                    height: 7em;
+                }
             }
 
             &--last {
@@ -90,6 +114,11 @@
                 justify-content: center;
                 border: 1px solid rgb(207, 207, 207);
                 border-radius: 0 7px 7px 0;
+
+                @media only screen and (max-width: 700px) {
+                    width: 90%;
+                    height: 7em;
+                }
             }
         }
     }
@@ -100,6 +129,12 @@
         flex-direction: row;
         margin-top: 30px;
 
+        @media only screen and (max-width: 485px) {
+            flex-direction: column;
+            width: 90%;
+
+        }
+
         &__contact {
             display: flex;
             flex-direction: column;
@@ -107,6 +142,10 @@
             background-color: white;
             border-radius: 10px;
             border: 1px solid rgb(207, 207, 207);
+
+            @media only screen and (max-width: 485px) {
+                width: 100%;
+            }
 
             &__title {
                 font-size: 1.8em;
@@ -116,6 +155,10 @@
                 padding: 15px 0 15px 20px;
                 border-bottom: 1px solid rgb(207, 207, 207);
 
+                @media only screen and (max-width: 485px) {
+                    width: 90%;
+                }
+
             }
 
             &__row {
@@ -124,9 +167,17 @@
                 flex-direction: row;
                 margin-top: 20px;
 
+                @media only screen and (max-width: 1060px) {
+                    flex-direction: column;
+                }
+
                 &--item {
                     margin-left: 50px;
                     margin-right: 200px;
+
+                    @media only screen and (max-width: 1060px) {
+                        margin-top: 10px;
+                    }
 
                     &__key {
                         font-size: 1.5em;
@@ -146,16 +197,15 @@
 
             &__column {
                 display: flex;
-                width: 100%;
                 flex-direction: column;
                 margin: 20px 0 20px 50px;
-
 
                 &__key {
                     font-size: 1.5em;
                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                     color: rgb(1, 43, 63);
                     margin: 0;
+                    width: 100%;
                 }
 
                 &__value {
@@ -179,6 +229,10 @@
             border-radius: 10px;
             border: 1px solid rgb(207, 207, 207);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            @media only screen and (max-width: 485px) {
+                margin: 0;
+            }
 
             &__google-map {
                 width: 100%;

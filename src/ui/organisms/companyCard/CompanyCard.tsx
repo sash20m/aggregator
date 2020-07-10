@@ -91,7 +91,7 @@ const CompanyCard: React.FC<Props> = (props) => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="results__item__company-info__column">
             <div className="results__item__company-info__column__item">
               <p className="results__item__company-info__column__item--key">
                 Nr. by the employees:
@@ -117,7 +117,7 @@ const CompanyCard: React.FC<Props> = (props) => {
               </p>
             </div>
           </div>
-          <div className="results__item__company-info__column__item">
+          <div className="results__item__company-info__column">
             <div className="results__item__company-info__column__item--key">
               Contact
             </div>

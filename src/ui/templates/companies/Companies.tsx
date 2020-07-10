@@ -56,9 +56,9 @@ export const CompaniesList: React.FC<Props> = (props) => {
   if (!companies) return <></>;
 
   return (
-    <div className="layout">
+    <div className="layout-companies">
       <HeaderBar searchVisible={false} />
-      <div className="layout__search-area-small">
+      <div className="layout-companies__search-area-small">
         <SearchInput />
       </div>
       <div className="nr-results-layout">

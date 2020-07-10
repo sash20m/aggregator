@@ -65,7 +65,7 @@ export const CompanyPage: React.FC<Props> = (props) => {
   }, [Router, data]);
 
   return (
-    <div className="layout">
+    <div className="layout-company">
       <HeaderBar searchVisible />
       {data.name && <CompanyInfo companyData={{ data, imageURL }} />}
     </div>

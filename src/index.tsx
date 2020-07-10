@@ -2,7 +2,6 @@ import React from 'react';
 
 import { getSuggestions } from './services/companies.services';
 import { SearchInput } from './ui/molecules/searchInput/SearchInput';
-import { HeaderBar } from './ui/molecules/headerbar/Headerbar';
 
 import './index.scss';
 
@@ -18,8 +17,8 @@ interface Props {
 export const Home: React.FC<Props> = ({ propsData }) => {
   return (
     <div className="layout">
-      <HeaderBar searchVisible={false} />
       <div className="layout__search-area">
+        <img className="layout__search-area__logo" src="logo.png" alt="logo" />
         <SearchInput suggestions={propsData} />
       </div>
     </div>
