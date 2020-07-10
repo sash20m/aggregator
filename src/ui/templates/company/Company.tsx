@@ -84,15 +84,7 @@ export const getSSProps = async ({
   if (url !== undefined) {
     const cutURL = url.slice(32, url.length - 5);
     const data = await getCompany(cutURL);
-    // const data = await axios
-    //   .get<Company>(`https://app.informer.md/api/public/company?slug=${cutURL}`)
-    //   .then((response) => response.data);
 
-    // const res = await fetch(
-    //   `https://app.informer.md/api/public/company?slug=${cutURL}`
-    // );
-
-    // const data = await res.json();
     return {
       props: { data },
     };

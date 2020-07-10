@@ -32,10 +32,6 @@ export const getSProps = async (): Promise<{
   };
 }> => {
   const data = await getSuggestions(null);
-  // const res = await fetch(
-  //   'https://app.informer.md/api/public/search?per_page=5'
-  // );
-  // const data = await res.json();
   const propsData = data;
   return {
     props: {

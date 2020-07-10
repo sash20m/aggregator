@@ -27,7 +27,8 @@ export const SearchInput = (props: Props): JSX.Element => {
       const res = await getSuggestions(name);
       setData(res);
     } catch (error) {
-      // console.log(error);
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
   };
 

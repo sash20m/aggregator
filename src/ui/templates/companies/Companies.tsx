@@ -49,9 +49,6 @@ export const CompaniesList: React.FC<Props> = (props) => {
   }, [props]);
 
   const onChangePage = async (newPage: string) => {
-    // const res = await fetch(
-    //   `https://app.informer.md/api/public/search?per_page=10&page=${newPage}&company_name=${companyName}`
-    // );
     const data = await getCompanies(companyName, newPage, 10);
     setCompanies(data);
   };
@@ -89,10 +86,6 @@ export const getSSProps = async ({
   const { url } = req;
   if (url !== undefined) {
     const companySlug = url.slice(23, url.length);
-
-    // const res = await fetch(
-    //   `https://app.informer.md/api/public/search?per_page=10&company_name=${companySlug}&page=1`
-    // );
     const page = '1';
     const perPage = 10;
     const data = await getCompanies(companySlug, page, perPage);
