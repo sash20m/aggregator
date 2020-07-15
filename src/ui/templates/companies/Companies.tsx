@@ -34,7 +34,7 @@ export interface Companies {
 
 interface Props {
   data: Companies;
-  companyName: string;
+  companyName: string | string[] | undefined;
 }
 
 export const CompaniesList: React.FC<Props> = (props) => {
@@ -81,17 +81,14 @@ interface SSProps {
 }
 
 export const getSSProps = async ({
-  req,
+  params,
 }: GetServerSidePropsContext): Promise<SSProps | null> => {
-  const { url } = req;
-  if (url !== undefined) {
-    const companySlug = url.slice(23, url.length);
+  if (params) {
     const page = '1';
     const perPage = 10;
-    const data = await getCompanies(companySlug, page, perPage);
-
+    const data = await getCompanies(params.slug, page, perPage);
     return {
-      props: { data, companyName: companySlug },
+      props: { data, companyName: params.slug },
     };
   }
   return null;

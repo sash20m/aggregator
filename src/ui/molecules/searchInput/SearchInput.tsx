@@ -64,7 +64,7 @@ export const SearchInput = (props: Props): JSX.Element => {
 
   const goToCompanies = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      Router.push(`/companies/list?search=${inputValue}`);
+      Router.push(`/companies/${inputValue}`);
     }
   };
 

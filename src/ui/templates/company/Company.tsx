@@ -57,6 +57,7 @@ export const CompanyPage: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const route = Router.query;
+    console.log(data, 'jheye');
     if (!data.name) {
       Router.push('/company/[slug]', `/company/${route.slug}`);
     } else if (data.general_data.contact_info.sites[0]) {
@@ -73,18 +74,14 @@ export const CompanyPage: React.FC<Props> = (props) => {
 };
 
 export const getSSProps = async ({
-  req,
+  params,
 }: GetServerSidePropsContext): Promise<{
   props: {
     data: Company;
   };
 } | null> => {
-  const { url } = req;
-
-  if (url !== undefined) {
-    const cutURL = url.slice(32, url.length - 5);
-    const data = await getCompany(cutURL);
-
+  if (params) {
+    const data = await getCompany(params.slug);
     return {
       props: { data },
     };

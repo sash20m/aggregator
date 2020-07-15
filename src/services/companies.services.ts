@@ -29,7 +29,7 @@ export const getSuggestions = (name: string | null): Promise<Suggestions[]> => {
  *
  */
 export const getCompanies = (
-  company: string,
+  company: string | string[] | undefined,
   page: string,
   perPage: number
 ): Promise<Companies> => {
@@ -42,11 +42,13 @@ export const getCompanies = (
 
 /**
  *
- * @param {string} cutURL
+ * @param {string} name
  *
  */
-export const getCompany = (cutURL: string): Promise<Company> => {
+export const getCompany = (
+  name: string | undefined | string[]
+): Promise<Company> => {
   return axios
-    .get<Company>(`https://app.informer.md/api/public/company?slug=${cutURL}`)
+    .get<Company>(`https://app.informer.md/api/public/company?slug=${name}`)
     .then((response) => response.data);
 };
