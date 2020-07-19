@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { getSuggestions } from './services/companies.services';
-import { SearchInput } from './ui/molecules/searchInput/SearchInput';
+import { SearchInput } from 'ui/molecules/searchInput/SearchInput';
+import { getSuggestions } from 'services/companies.services';
 
 import './index.scss';
 
@@ -19,6 +19,9 @@ export const Home: React.FC<Props> = ({ propsData }) => {
     <div className="layout">
       <div className="layout__search-area">
         <img className="layout__search-area__logo" src="logo.png" alt="logo" />
+        <p className="layout__search-area__motto">
+          The largest database of companies and employees in Moldova
+        </p>
         <SearchInput suggestions={propsData} />
       </div>
     </div>

@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { GetServerSidePropsContext } from 'next';
-import { getCompanies } from '../../../services/companies.services';
-import { HeaderBar } from '../../molecules/headerbar/Headerbar';
-import { SearchInput } from '../../molecules/searchInput/SearchInput';
-import { Pagination } from '../../molecules/pagination/Pagination';
-import CompanyCard from '../../organisms/companyCard/CompanyCard';
+import { CompanyCard } from 'ui/organisms/companyCard/CompanyCard';
+import { getCompanies } from 'services/companies.services';
+import { HeaderBar } from 'ui/molecules/headerbar/Headerbar';
+import { SearchInput } from 'ui/molecules/searchInput/SearchInput';
+import { Pagination } from 'ui/molecules/pagination/Pagination';
 
 import './CompaniesList.scss';
 
@@ -37,20 +37,19 @@ interface Props {
   companyName: string | string[] | undefined;
 }
 
-export const CompaniesList: React.FC<Props> = (props) => {
-  const { companyName } = props;
+export const CompaniesList: React.FC<Props> = ({ companyName, data }) => {
   const [companies, setCompanies] = useState<Companies | null>();
 
   useEffect(() => {
     const onSetData = () => {
-      setCompanies(props.data);
+      setCompanies(data);
     };
     onSetData();
-  }, [props]);
+  }, [data]);
 
   const onChangePage = async (newPage: string) => {
-    const data = await getCompanies(companyName, newPage, 10);
-    setCompanies(data);
+    const companiesData = await getCompanies(companyName, newPage, 10);
+    setCompanies(companiesData);
   };
 
   if (!companies) return <></>;
@@ -59,7 +58,7 @@ export const CompaniesList: React.FC<Props> = (props) => {
     <div className="layout-companies">
       <HeaderBar searchVisible={false} />
       <div className="layout-companies__search-area-small">
-        <SearchInput />
+        <SearchInput suggestions={null} />
       </div>
       <div className="nr-results-layout">
         <p>
@@ -69,7 +68,7 @@ export const CompaniesList: React.FC<Props> = (props) => {
       </div>
       {companies &&
         companies.data.map((companyInfo: CompaniesCard) => (
-          <CompanyCard data={companyInfo} />
+          <CompanyCard data={companyInfo} key={companyInfo.name} />
         ))}
       <Pagination pages={companies.pages} onChangePage={onChangePage} />
     </div>

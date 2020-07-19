@@ -28,11 +28,11 @@
     "react-google-maps": "^9.4.5"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
+    "src/**/*.{ts,tsx}": [
       "eslint . --fix",
       "git add"
     ],
-    "*.(js|html|css)": [
+    "*.(ts|html|css)": [
       "prettier --write",
       "git add"
     ]

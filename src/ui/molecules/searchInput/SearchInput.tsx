@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
-import { getSuggestions } from '../../../services/companies.services';
+import { getSuggestions } from 'services/companies.services';
 import { Suggestions } from '../../../index';
 
 import './SearchInput.scss';
@@ -11,11 +11,7 @@ interface Props {
   suggestions: Suggestions[] | null;
 }
 
-const defaultProps = {
-  suggestions: null,
-} as Partial<Props>;
-
-export const SearchInput = (props: Props): JSX.Element => {
+export const SearchInput: React.FC<Props> = ({ suggestions }) => {
   const Router = useRouter();
   const [focused, setFocused] = useState<boolean>(false);
   const [mouseOver, setMouseOver] = useState<boolean>(false);
@@ -28,18 +24,18 @@ export const SearchInput = (props: Props): JSX.Element => {
       setData(res);
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
     const onSetData = () => {
-      setData(props.suggestions);
+      setData(suggestions);
     };
 
-    if (props.suggestions) onSetData();
+    if (suggestions) onSetData();
     else getSuggestionsList(null);
-  }, [props]);
+  }, [suggestions]);
 
   const searchCompanies = (e: React.ChangeEvent<HTMLInputElement>) => {
     getSuggestionsList(e.target.value);
@@ -119,5 +115,3 @@ export const SearchInput = (props: Props): JSX.Element => {
     </div>
   );
 };
-
-SearchInput.defaultProps = defaultProps;

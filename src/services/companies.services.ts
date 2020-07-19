@@ -3,17 +3,12 @@ import { Company } from '../ui/templates/company/Company';
 import { Companies } from '../ui/templates/companies/Companies';
 import { Suggestions } from '../index';
 
-/**
- *
- * @param {string} name
- *
- */
+const BASE_URL = 'https://app.informer.md/api/public/';
+
 export const getSuggestions = (name: string | null): Promise<Suggestions[]> => {
   if (name) {
     return axios
-      .get(
-        `https://app.informer.md/api/public/search?per_page=5&company_name=${name}`
-      )
+      .get(`${BASE_URL}search?per_page=5&company_name=${name}`)
       .then((response) => response.data.data);
   }
   return axios
@@ -21,34 +16,20 @@ export const getSuggestions = (name: string | null): Promise<Suggestions[]> => {
     .then((response) => response.data.data);
 };
 
-/**
- *
- * @param {string} company
- * @param {number} page
- * @param {number} perPage
- *
- */
 export const getCompanies = (
   company: string | string[] | undefined,
   page: string,
   perPage: number
-): Promise<Companies> => {
-  return axios
+): Promise<Companies> =>
+  axios
     .get<Companies>(
-      `https://app.informer.md/api/public/search?per_page=${perPage}&company_name=${company}&page=${page}`
+      `${BASE_URL}search?per_page=${perPage}&company_name=${company}&page=${page}`
     )
     .then((response) => response.data);
-};
 
-/**
- *
- * @param {string} name
- *
- */
 export const getCompany = (
   name: string | undefined | string[]
-): Promise<Company> => {
-  return axios
-    .get<Company>(`https://app.informer.md/api/public/company?slug=${name}`)
+): Promise<Company> =>
+  axios
+    .get<Company>(`${BASE_URL}company?slug=${name}`)
     .then((response) => response.data);
-};

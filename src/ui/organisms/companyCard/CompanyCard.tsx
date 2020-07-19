@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useRouter } from 'next/router';
-import { CompaniesCard } from '../../templates/companies/Companies';
+import { CompaniesCard } from 'ui/templates/companies/Companies';
 
 import './CompanyCard.scss';
 
@@ -9,9 +9,8 @@ interface Props {
   data: CompaniesCard;
 }
 
-const CompanyCard: React.FC<Props> = (props) => {
+export const CompanyCard: React.FC<Props> = ({ data }) => {
   const Router = useRouter();
-  const { data } = props;
   const yearsOld = new Date().getFullYear() - data.creation_year;
 
   let imageURL = '';
@@ -21,19 +20,16 @@ const CompanyCard: React.FC<Props> = (props) => {
 
   const goToCompany = () => {
     Router.push('/company/[slug]', `/company/${data.slug}`);
+    window.scrollTo(0, 0);
   };
 
   return (
     <div className="results">
       <div className="results__item">
-        <div
+        <button
           className="results__item__header"
           onClick={goToCompany}
-          tabIndex={0}
-          role="button"
-          onKeyDown={() => {
-            '';
-          }}
+          type="button"
         >
           {imageURL ? (
             <img
@@ -50,7 +46,7 @@ const CompanyCard: React.FC<Props> = (props) => {
               {data.location}
             </div>
           </div>
-        </div>
+        </button>
         <div className="results__item__company-info">
           <div className="results__item__company-info__column">
             <div className="results__item__company-info__column__item">
@@ -117,26 +113,40 @@ const CompanyCard: React.FC<Props> = (props) => {
               </p>
             </div>
           </div>
-          <div className="results__item__company-info__column">
+          <div className="results__item__company-info__column--row">
             <div className="results__item__company-info__column__item--key">
               Contact
             </div>
             <div>
               <p className="results__item__company-info__column__item--value">
-                Phone Mobile-
-                {data.mobile}
+                <div className="results__item__company-info__column__item__results">
+                  <img
+                    className="results__item__company-info__column__item__icon"
+                    src="../phone.png"
+                    alt="phone"
+                  />
+                  <p>Phone</p>
+                </div>
               </p>
               <p className="results__item__company-info__column__item--value">
-                Phone-
-                {data.phone}
+                <div className="results__item__company-info__column__item__results">
+                  <img
+                    className="results__item__company-info__column__item__icon"
+                    src="../mobile.png"
+                    alt="phone"
+                  />
+                  <p>Mobile</p>
+                </div>
               </p>
               <p className="results__item__company-info__column__item--value">
-                Email-
-                {data.email}
-              </p>
-              <p className="results__item__company-info__column__item--value">
-                Website-
-                {data.website}
+                <div className="results__item__company-info__column__item__results">
+                  <img
+                    className="results__item__company-info__column__item__icon"
+                    src="../email.png"
+                    alt="phone"
+                  />
+                  <p>Email</p>
+                </div>
               </p>
             </div>
           </div>
@@ -160,5 +170,3 @@ const CompanyCard: React.FC<Props> = (props) => {
     </div>
   );
 };
-
-export default CompanyCard;

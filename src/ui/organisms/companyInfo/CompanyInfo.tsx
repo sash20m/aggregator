@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { Company } from '../../templates/company/Company';
+import { Company } from 'ui/templates/company/Company';
 
 import './CompanyInfo.scss';
 
@@ -14,8 +15,7 @@ interface Props {
   companyData: CompanyInfo;
 }
 
-export const CompanyInfo: React.FC<Props> = (props) => {
-  const { companyData } = props;
+export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
   const { data, imageURL } = companyData;
   return (
     <div className="company-content">
@@ -68,7 +68,18 @@ export const CompanyInfo: React.FC<Props> = (props) => {
                   Email:
                 </p>
                 <p className="company-info__footer-info__contact__row--item__value">
-                  {data.general_data.contact_info.emails[0] ? 'EMAIL' : 'None'}
+                  <img
+                    className="company-info__footer-info__contact__row--item__value__icon"
+                    src="../email.png"
+                    alt="email"
+                  />
+                  <div className="company-info__footer-info__contact__row--item__value__results">
+                    {data.general_data.contact_info.emails
+                      ? data.general_data.contact_info.emails.map(() => (
+                          <p> Email</p>
+                        ))
+                      : 'None'}
+                  </div>
                 </p>
               </div>
               <div className="company-info__footer-info__contact__row--item">
@@ -76,7 +87,18 @@ export const CompanyInfo: React.FC<Props> = (props) => {
                   Phone:
                 </p>
                 <p className="company-info__footer-info__contact__row--item__value">
-                  {data.general_data.contact_info.phones[0] ? 'EMAIL' : 'None'}
+                  <img
+                    className="company-info__footer-info__contact__row--item__value__icon"
+                    src="../phone.png"
+                    alt="phone"
+                  />
+                  <div className="company-info__footer-info__contact__row--item__value__results">
+                    {data.general_data.contact_info.emails
+                      ? data.general_data.contact_info.emails.map(() => (
+                          <p>Phone</p>
+                        ))
+                      : 'None'}
+                  </div>
                 </p>
               </div>
             </div>
@@ -85,7 +107,7 @@ export const CompanyInfo: React.FC<Props> = (props) => {
                 Website
               </p>
               <p className="company-info__footer-info__contact__column__value">
-                {data.general_data.contact_info.sites[0] ? 'imageURL' : 'None'}
+                {data.general_data.contact_info.sites[0] ? imageURL : 'None'}
               </p>
             </div>
           </div>

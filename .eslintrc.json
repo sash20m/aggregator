@@ -25,7 +25,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["molecules", "pages", "services"],
+        "paths": ["src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     },

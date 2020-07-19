@@ -7,11 +7,10 @@ interface Props {
   onChangePage(newPage: string): void;
 }
 
-export const Pagination: React.FC<Props> = (props) => {
+export const Pagination: React.FC<Props> = ({ pages, onChangePage }) => {
   const [pagesArray, setPagesArray] = useState([1, 2, 3, 4, 5, 6, 7]);
   const [firstPage, setFirstPage] = useState<number>(1);
   const [clickedPage, setClickedPage] = useState<number>(1);
-  const { pages, onChangePage } = props;
 
   useEffect(() => {
     if (pages < pagesArray.length) setPagesArray(pagesArray.splice(0, pages));
@@ -46,6 +45,7 @@ export const Pagination: React.FC<Props> = (props) => {
       </button>
       {pagesArray.map((page, key) => (
         <button
+          key={page}
           className={
             firstPage + key === clickedPage
               ? 'pagination__page-btn--active'

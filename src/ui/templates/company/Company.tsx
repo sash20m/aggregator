@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { getCompany } from '../../../services/companies.services';
-import { CompanyInfo } from '../../organisms/companyInfo/CompanyInfo';
-import { HeaderBar } from '../../molecules/headerbar/Headerbar';
+import { HeaderBar } from 'ui/molecules/headerbar/Headerbar';
+import { getCompany } from 'services/companies.services';
+import { CompanyInfo } from 'ui/organisms/companyInfo/CompanyInfo';
 
 import './Company.scss';
 
@@ -50,14 +50,13 @@ interface Props {
   data: Company;
 }
 
-export const CompanyPage: React.FC<Props> = (props) => {
-  const { data } = props;
+export const CompanyPage: React.FC<Props> = ({ data }) => {
   const [imageURL, setImageURL] = useState('');
   const Router = useRouter();
 
   useEffect(() => {
     const route = Router.query;
-    console.log(data, 'jheye');
+
     if (!data.name) {
       Router.push('/company/[slug]', `/company/${route.slug}`);
     } else if (data.general_data.contact_info.sites[0]) {

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getSuggestions } from '../../../services/companies.services';
-import { Suggestions } from '../../../index';
+import { getSuggestions } from 'services/companies.services';
+import { Suggestions } from 'index';
 
 import './Headerbar.scss';
 
@@ -12,9 +12,8 @@ interface Props {
   searchVisible: boolean;
 }
 
-export const HeaderBar = (props: Props): JSX.Element => {
+export const HeaderBar = ({ searchVisible }: Props): JSX.Element => {
   const Router = useRouter();
-  const { searchVisible } = props;
   const [inputValue, setInputValue] = useState<string>('');
   const [focused, setFocused] = useState<boolean>(false);
   const [mouseOver, setMouseOver] = useState<boolean>(false);
@@ -26,7 +25,7 @@ export const HeaderBar = (props: Props): JSX.Element => {
       setData(res);
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.error(error);
     }
   };
 
