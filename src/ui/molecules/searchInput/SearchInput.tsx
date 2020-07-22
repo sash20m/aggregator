@@ -17,6 +17,8 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const [data, setData] = useState<Suggestions[] | null>(null);
   const [inputValue, setInputValue] = useState('');
+  const [lastSearched, setLastSearched] = useState<string | null>('');
+  const [specialClass, setSpecialClass] = useState(false);
 
   const getSuggestionsList = async (name: string | null) => {
     try {
@@ -32,10 +34,18 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
     const onSetData = () => {
       setData(suggestions);
     };
-
     if (suggestions) onSetData();
-    else getSuggestionsList(null);
+    else {
+      getSuggestionsList(null);
+      setSpecialClass(true);
+    }
   }, [suggestions]);
+
+  useEffect(() => {
+    if (Router.pathname.search('companies/')) {
+      setLastSearched(sessionStorage.getItem('lastSearched'));
+    }
+  }, [Router]);
 
   const searchCompanies = (e: React.ChangeEvent<HTMLInputElement>) => {
     getSuggestionsList(e.target.value);
@@ -60,6 +70,7 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
 
   const goToCompanies = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      sessionStorage.setItem('lastSearched', inputValue);
       Router.push(`/companies/${inputValue}`);
     }
   };
@@ -69,49 +80,94 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
     Router.push('/company/[slug]', `/company/${e.currentTarget.name}`);
   };
 
+  const resetSearch = () => {
+    sessionStorage.clear();
+    Router.push(`/companies/all`);
+  };
+
   return (
     <div className="search-content">
-      <input
-        className={
-          focused ? 'search-content__input--active' : 'search-content__input'
-        }
-        type="text"
-        placeholder="Search from 225,195 companies"
-        onClick={onInputClick}
-        onBlur={onInputLeave}
-        onChange={searchCompanies}
-        value={inputValue}
-        onKeyDown={goToCompanies}
-      />
-      {focused && (
-        <ul
-          className="search-content__suggestions"
-          onMouseOver={mouseOverList}
-          onMouseOut={mouseLeaveList}
-        >
-          {data &&
-            data.map((company: Suggestions) => (
-              <li
-                key={company.name}
-                className="search-content__suggestions__item"
-              >
-                <button
-                  type="button"
-                  className="search-content__suggestions__item__button"
-                  name={company.slug}
-                  onClick={goToCompany}
+      <div className="search-content__input-wrapper">
+        <input
+          className={
+            focused ? 'search-content__input--active' : 'search-content__input'
+          }
+          type="text"
+          placeholder="Search from 225,195 companies"
+          onClick={onInputClick}
+          onBlur={onInputLeave}
+          onChange={searchCompanies}
+          value={inputValue}
+          onKeyDown={goToCompanies}
+        />
+        <img
+          className="search-content__search-magnifier"
+          src="../search.png"
+          alt=""
+        />
+        {focused && (
+          <ul
+            className={
+              specialClass
+                ? 'search-content__special-suggestions'
+                : 'search-content__suggestions'
+            }
+            onMouseOver={mouseOverList}
+            onMouseOut={mouseLeaveList}
+          >
+            {!data && (
+              <p className="search-content__suggestions__loading">
+                {' '}
+                Loading...
+              </p>
+            )}
+            {data &&
+              data.map((company: Suggestions) => (
+                <li
+                  key={company.name}
+                  className="search-content__suggestions__item"
                 >
-                  {company.name}
-                </button>
-              </li>
-            ))}
-        </ul>
-      )}
+                  <button
+                    type="button"
+                    className="search-content__suggestions__item__button"
+                    name={company.slug}
+                    onClick={goToCompany}
+                  >
+                    {`${company.name} • ${company.idno}`}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
+
       <div className="search-content__options">
         <p className="search-content__options__item">Search In</p>
         <p className="search-content__options__item--selected">Companies</p>
         <p className="search-content__options__item">Persons</p>
       </div>
+      {lastSearched && (
+        <div className="search-content__filter-wrapp">
+          <div className="search-content__filter-wrapp__filter">
+            <div className="search-content__filter-wrapp__filter__info">
+              <img
+                className="search-content__filter-wrapp__filter__icon"
+                src="../filter.png"
+                alt=""
+              />
+              <p>{lastSearched}</p>
+            </div>
+
+            <button
+              className="search-content__filter-wrapp__filter__remove"
+              type="button"
+              onClick={resetSearch}
+            >
+              X
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

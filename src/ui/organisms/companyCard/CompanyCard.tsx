@@ -38,7 +38,9 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
               alt=""
             />
           ) : (
-            <p className="results__item__header__avatar">No Photo</p>
+            <div className="results__item__header__no-avatar">
+              {data.name[0]}
+            </div>
           )}
           <div>
             <div className="results__item__header__name">{data.name}</div>
@@ -101,7 +103,7 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
                 Turnover:
               </p>
               <p className="results__item__company-info__column__item--value">
-                {data.turnover}
+                {`${data.turnover} MDL`}
               </p>
             </div>
             <div className="results__item__company-info__column__item">
@@ -118,7 +120,7 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
               Contact
             </div>
             <div>
-              <p className="results__item__company-info__column__item--value">
+              <div className="results__item__company-info__column__item--value">
                 <div className="results__item__company-info__column__item__results">
                   <img
                     className="results__item__company-info__column__item__icon"
@@ -127,8 +129,8 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
                   />
                   <p>Phone</p>
                 </div>
-              </p>
-              <p className="results__item__company-info__column__item--value">
+              </div>
+              <div className="results__item__company-info__column__item--value">
                 <div className="results__item__company-info__column__item__results">
                   <img
                     className="results__item__company-info__column__item__icon"
@@ -137,8 +139,8 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
                   />
                   <p>Mobile</p>
                 </div>
-              </p>
-              <p className="results__item__company-info__column__item--value">
+              </div>
+              <div className="results__item__company-info__column__item--value">
                 <div className="results__item__company-info__column__item__results">
                   <img
                     className="results__item__company-info__column__item__icon"
@@ -147,7 +149,7 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
                   />
                   <p>Email</p>
                 </div>
-              </p>
+              </div>
             </div>
           </div>
         </div>

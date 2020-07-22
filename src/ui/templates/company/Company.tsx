@@ -21,6 +21,7 @@ interface AddressDeFacto {
 interface ContactInfo {
   emails: boolean[];
   phones: boolean[];
+  mobile: boolean[];
   address_de_facto: AddressDeFacto;
   sites: string[];
 }
@@ -31,7 +32,7 @@ interface Size {
 
 interface GeneralData {
   idno: string;
-  creation_year: number;
+  creation_date: number;
   size: Size;
   contact_info: ContactInfo;
 }

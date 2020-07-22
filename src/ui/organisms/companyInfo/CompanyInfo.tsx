@@ -20,18 +20,21 @@ export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
   return (
     <div className="company-content">
       <div className="header">
-        {imageURL ? (
-          <img
-            className="header__avatar"
-            src={`https://account.globaldatabase.com/logo/${imageURL}/`}
-            alt=""
-          />
-        ) : (
-          <p className="header__avatar">No Photo</p>
-        )}
-        <div className="header__info">
-          <div className="header__info__name">{data.name}</div>
-          <div className="header__info__industry">{data.status.title}</div>
+        <div className="header__content">
+          {imageURL ? (
+            <img
+              className="header__avatar"
+              src={`https://account.globaldatabase.com/logo/${imageURL}/`}
+              alt=""
+            />
+          ) : (
+            <div className="header__no-avatar">{data.name[0]}</div>
+          )}
+
+          <div className="header__info">
+            <div className="header__info__name">{data.name}</div>
+            <div className="header__info__industry">{data.status.title}</div>
+          </div>
         </div>
       </div>
       <div className="company-info">
@@ -44,10 +47,10 @@ export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
           </div>
           <div className="company-info__header-info__item">
             <p className="company-info__header-info__item__key">
-              Registration Year
+              Registration year
             </p>
             <p className="company-info__header-info__item__value">
-              {data.general_data.creation_year}
+              {data.general_data.creation_date}
             </p>
           </div>
           <div className="company-info__header-info__item--last">
@@ -65,47 +68,71 @@ export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
             <div className="company-info__footer-info__contact__row">
               <div className="company-info__footer-info__contact__row--item">
                 <p className="company-info__footer-info__contact__row--item__key">
-                  Email:
+                  EMAIL:
                 </p>
-                <p className="company-info__footer-info__contact__row--item__value">
+                <div className="company-info__footer-info__contact__row--item__value">
                   <img
                     className="company-info__footer-info__contact__row--item__value__icon"
                     src="../email.png"
                     alt="email"
                   />
+
                   <div className="company-info__footer-info__contact__row--item__value__results">
-                    {data.general_data.contact_info.emails
-                      ? data.general_data.contact_info.emails.map(() => (
-                          <p> Email</p>
-                        ))
+                    {data.general_data.contact_info.emails.length !== 0
+                      ? data.general_data.contact_info.emails.map(
+                          (item, key) => <p key={key}> Email</p>
+                        )
                       : 'None'}
                   </div>
-                </p>
+                </div>
               </div>
               <div className="company-info__footer-info__contact__row--item">
                 <p className="company-info__footer-info__contact__row--item__key">
-                  Phone:
+                  PHONE/FAX:
                 </p>
-                <p className="company-info__footer-info__contact__row--item__value">
+                <div className="company-info__footer-info__contact__row--item__value">
                   <img
                     className="company-info__footer-info__contact__row--item__value__icon"
                     src="../phone.png"
                     alt="phone"
                   />
+
                   <div className="company-info__footer-info__contact__row--item__value__results">
-                    {data.general_data.contact_info.emails
-                      ? data.general_data.contact_info.emails.map(() => (
-                          <p>Phone</p>
-                        ))
+                    {data.general_data.contact_info.phones.length !== 0
+                      ? data.general_data.contact_info.phones.map(
+                          (item, key) => <p key={key}>Phone</p>
+                        )
                       : 'None'}
                   </div>
-                </p>
+                </div>
+                <div className="company-info__footer-info__contact__row--item__value">
+                  <img
+                    className="company-info__footer-info__contact__row--item__value__icon"
+                    src="../mobile.png"
+                    alt="mobile"
+                  />
+                  <div className="company-info__footer-info__contact__row--item__value__results">
+                    {data.general_data.contact_info.mobile.length !== 0
+                      ? data.general_data.contact_info.mobile.map(
+                          (item, key) => <p key={key}>Mobile</p>
+                        )
+                      : 'None'}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="company-info__footer-info__contact__column">
-              <p className="company-info__footer-info__contact__column__key">
+              <div className="company-info__footer-info__contact__column__key">
+                {data.general_data.contact_info.sites[0] && (
+                  <img
+                    className="company-info__footer-info__contact__row--item__value__icon"
+                    src="../www.png"
+                    alt="mobile"
+                  />
+                )}
                 Website
-              </p>
+              </div>
+
               <p className="company-info__footer-info__contact__column__value">
                 {data.general_data.contact_info.sites[0] ? imageURL : 'None'}
               </p>

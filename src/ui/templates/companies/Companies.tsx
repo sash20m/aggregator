@@ -58,13 +58,14 @@ export const CompaniesList: React.FC<Props> = ({ companyName, data }) => {
     <div className="layout-companies">
       <HeaderBar searchVisible={false} />
       <div className="layout-companies__search-area-small">
-        <SearchInput suggestions={null} />
+        <div className="layout-companies__search-wrapper">
+          <SearchInput suggestions={null} />
+        </div>
       </div>
       <div className="nr-results-layout">
-        <p>
-          {companies.total_results}
-          -total results
-        </p>
+        <img className="nr-results-layout__bag-case" src="../bag.png" alt="" />
+        <p>{companies.total_results}</p>
+        <p>of results</p>
       </div>
       {companies &&
         companies.data.map((companyInfo: CompaniesCard) => (

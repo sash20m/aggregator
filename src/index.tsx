@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { SearchInput } from 'ui/molecules/searchInput/SearchInput';
 import { getSuggestions } from 'services/companies.services';
 
@@ -8,6 +7,7 @@ import './index.scss';
 export interface Suggestions {
   name: string;
   slug: string;
+  idno: string;
 }
 
 interface Props {
@@ -22,7 +22,9 @@ export const Home: React.FC<Props> = ({ propsData }) => {
         <p className="layout__search-area__motto">
           The largest database of companies and employees in Moldova
         </p>
-        <SearchInput suggestions={propsData} />
+        <div className="layout__search-area__search-wrapper">
+          <SearchInput suggestions={propsData} />
+        </div>
       </div>
     </div>
   );

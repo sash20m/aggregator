@@ -56,8 +56,13 @@ export const HeaderBar = ({ searchVisible }: Props): JSX.Element => {
 
   const goToCompanies = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      sessionStorage.setItem('lastSearched', inputValue);
       Router.push(`/companies/${inputValue}`);
     }
+  };
+
+  const resetSessionStorage = () => {
+    sessionStorage.clear();
   };
 
   const goToCompany = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,46 +70,75 @@ export const HeaderBar = ({ searchVisible }: Props): JSX.Element => {
     Router.push('/company/[slug]', `/company/${e.currentTarget.name}`);
   };
 
+  const showAllCompanies = () => {
+    setFocused(false);
+    Router.push('/companies/all');
+  };
+
   return (
-    <div className="header">
-      <Link href="/">
-        <img className="logo" src="../logo-small.png" alt="Logo" />
-      </Link>
-      {searchVisible && (
-        <div className="search">
-          <input
-            className={focused ? 'search__input--active' : 'search__input'}
-            type="text"
-            placeholder="Search from 225,195 companies"
-            onClick={onInputClick}
-            onBlur={onInputLeave}
-            onChange={searchCompanies}
-            value={inputValue}
-            onKeyDown={goToCompanies}
-          />
-          {focused && (
-            <ul
-              className="search__suggestions"
-              onMouseOver={mouseOverList}
-              onMouseOut={mouseLeaveList}
+    <div className="header-main">
+      <div className="header-main__content">
+        <Link href="/">
+          <button
+            className="logo__btn"
+            type="button"
+            onClick={resetSessionStorage}
+          >
+            <img className="logo" src="../logo-small.png" alt="Logo" />
+          </button>
+        </Link>
+        {searchVisible && (
+          <div className="search">
+            <img className="search__icon" src="../search.png" alt="" />
+            <input
+              className={focused ? 'search__input--active' : 'search__input'}
+              type="text"
+              placeholder="Search from 225,195 companies"
+              onClick={onInputClick}
+              onBlur={onInputLeave}
+              onChange={searchCompanies}
+              value={inputValue}
+              onKeyDown={goToCompanies}
+            />
+            <button
+              type="button"
+              className="search__show-all"
+              onClick={showAllCompanies}
             >
-              {data &&
-                data.map((company: Suggestions) => (
-                  <li key={company.name} className="search__suggestions__item">
-                    <button
-                      type="button"
-                      className="search__suggestions__item__button"
-                      name={company.slug}
-                      onClick={goToCompany}
+              Show All
+            </button>
+
+            {focused && (
+              <ul
+                className="search__suggestions"
+                onMouseOver={mouseOverList}
+                onMouseOut={mouseLeaveList}
+              >
+                {!data && (
+                  <p className="search__suggestions__loading"> Loading...</p>
+                )}
+
+                {data &&
+                  data.map((company: Suggestions) => (
+                    <li
+                      key={company.name}
+                      className="search__suggestions__item"
                     >
-                      {company.name}
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          )}
-        </div>
-      )}
+                      <button
+                        type="button"
+                        className="search__suggestions__item__button"
+                        name={company.slug}
+                        onClick={goToCompany}
+                      >
+                        {company.name}
+                      </button>
+                    </li>
+                  ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

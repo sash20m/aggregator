@@ -1,141 +1,349 @@
+@font-face {
+  font-family: openSansRegular;
+  src: url(/openSans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: openSansSemiBold;
+  src: url(/openSans/OpenSans-SemiBold.ttf);
+}
+
 .search-content {
-    display: flex;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+
+  &__search-magnifier {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    right: 50px;
+    z-index: 2;
+    top: 35px;
+    opacity: 50%;
+  }
+
+  &__input-wrapper {
     width: 100%;
-    flex-direction: column;
-    align-items: center;
+    display: flex;
+  }
 
-    &__input {
-        width: 86%;
-        max-width: 948px;
+  &__input {
+    display: inline-block;
+    width: 97%;
+    height: 64px;
+    border: 1px solid #9aabc2;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 1.3em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.5;
+    border-radius: 50px;
+    margin-top: 17px;
+    margin-left: 30px;
+    padding-left: 30px;
+    outline: none;
+    box-shadow: 0px 3px 11.52px 0.48px rgba(34, 45, 56, 0.07);
 
-        height: 67px;
-        border: 1px solid #9aabc2;
-        color: rgba(0, 0, 0, 0.65);
-        font-size: 1.3em;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-            'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-            'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-        line-height: 1.5;
+    &--active {
+      display: inline-block;
+      width: 97%;
+      height: 64px;
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 1.3em;
+      font-family: openSansRegular;
+      line-height: 1.5;
+      border-radius: 50px;
+      margin-top: 17px;
+      margin-left: 30px;
+      padding-left: 30px;
+      outline: none;
 
-        border-radius: 50px;
-        margin-top: 20px;
-        padding-left: 30px;
-        outline: none;
-        box-shadow: 0px 3px 11.52px 0.48px rgba(34, 45, 56, 0.07);
+      border-radius: 31px 31px 0 0;
+      border: 1px solid #467bbc;
+      box-shadow: 0px 3px 11.52px 0.48px rgba(34, 45, 56, 0.07);
+    }
+  }
 
-        @media only screen and (max-width: 600px) {}
+  &__special-suggestions {
+    position: absolute;
+    z-index: 2;
+    width: 95%;
+    max-width: 1268px;
+    overflow-y: auto;
+    list-style: none;
+    padding-left: 0;
+    background: white;
+    border-top-width: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: 1px solid #467bbc;
+    border-right: 1px solid #467bbc;
+    border-bottom: 1px solid #467bbc;
+    margin-top: 5em;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 
-        &--active {
-            width: 83vw;
-            max-width: 948px;
-            height: 67px;
-            border: 1px solid #467bbc;
-            color: rgba(0, 0, 0, 0.65);
-            font-size: 1.3em;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-                'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-                'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-            line-height: 1.5;
-            margin-top: 20px;
-            padding-left: 30px;
-            outline: none;
-            border-radius: 31px 31px 0 0;
-            box-shadow: 0px 3px 11.52px 0.48px rgba(34, 45, 56, 0.07);
-        }
+    @media only screen and (max-width: 1024px) {
+      width: 94%;
     }
 
-    &__suggestions {
-        position: absolute;
-        z-index: 2;
-        width: 83.15vw;
-        max-width: 950px;
-        overflow-y: auto;
-        list-style: none;
-        padding-left: 0;
-        background: white;
-        border-top-width: 0;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        border-left: 1px solid #467bbc;
-        border-right: 1px solid #467bbc;
-        border-bottom: 1px solid #467bbc;
-        padding-right: 30px;
-        margin-top: 5em;
-
-        &__item {
-            position: relative;
-            overflow: hidden;
-            font-size: 1em;
-            font-weight: 600;
-            line-height: 22px;
-            color: #000;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            cursor: pointer;
-            box-sizing: border-box;
-            list-style: none;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-            &__button {
-                width: 100%;
-                text-align: left;
-                padding: 10px 25px;
-                border: none;
-                margin: 0;
-                overflow: visible;
-                background: transparent;
-                color: inherit;
-                font: inherit;
-                line-height: normal;
-                -webkit-font-smoothing: inherit;
-                -moz-osx-font-smoothing: inherit;
-                -webkit-appearance: none;
-                cursor: pointer;
-                outline: inherit;
-
-                &:hover {
-                    color: #056ac8;
-                }
-            }
-        }
+    @media only screen and (max-width: 816px) {
+      width: 92.4%;
     }
 
-    &__options {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-top: 30px;
+    @media only screen and (max-width: 768px) {
+      width: 92%;
+    }
 
-        @media only screen and (max-width: 300px) {
-            flex-direction: column;
-        }
+    @media only screen and (max-width: 656px) {
+      width: 90.5%;
+    }
+
+    @media only screen and (max-width: 520px) {
+      width: 88%;
+    }
+
+    @media only screen and (max-width: 450px) {
+      width: 86.2%;
+    }
+
+    @media only screen and (max-width: 414px) {
+      width: 85%;
+    }
+
+    @media only screen and (max-width: 411px) {
+      width: 85%;
+    }
+
+    @media only screen and (max-width: 375px) {
+      width: 83.5%;
+    }
+
+    @media only screen and (max-width: 320px) {
+      width: 80.5%;
+    }
+
+    @media only screen and (max-width: 289px) {
+      width: 79%;
+    }
+  }
+
+  &__suggestions {
+    position: absolute;
+    z-index: 2;
+    width: 95%;
+    max-width: 978px;
+    overflow-y: auto;
+    list-style: none;
+    padding-left: 0;
+    background: white;
+    border-top-width: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: 1px solid #467bbc;
+    border-right: 1px solid #467bbc;
+    border-bottom: 1px solid #467bbc;
+    margin-top: 5em;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media only screen and (max-width: 1024px) {
+      width: 95%;
+    }
+
+    @media only screen and (max-width: 931px) {
+      width: 93%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      width: 92%;
+    }
+
+    @media only screen and (max-width: 740px) {
+      width: 90%;
+    }
+
+    @media only screen and (max-width: 566px) {
+      width: 87%;
+    }
+
+    @media only screen and (max-width: 566px) {
+      width: 82.4%;
+    }
+
+    @media only screen and (max-width: 450px) {
+      width: 86%;
+    }
+
+    @media only screen and (max-width: 414px) {
+      width: 85%;
+    }
+
+    @media only screen and (max-width: 411px) {
+      width: 85%;
+    }
+
+    @media only screen and (max-width: 375px) {
+      width: 83.5%;
+    }
+
+    @media only screen and (max-width: 320px) {
+      width: 80.5%;
+    }
+
+    @media only screen and (max-width: 289px) {
+      width: 79%;
+    }
+
+    &__loading {
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: openSansSemiBold;
+      color: #000;
+    }
+
+    &__item {
+      position: relative;
+      overflow: hidden;
+      font-size: 1em;
+      font-weight: 600;
+      line-height: 22px;
+      color: #000;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      box-sizing: border-box;
+      list-style: none;
+      font-family: openSansSemiBold;
+
+      &__button {
+        width: 100%;
+        text-align: left;
+        padding: 10px 25px;
+        border: none;
+        margin: 0;
+        overflow: visible;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        line-height: normal;
+        -webkit-font-smoothing: inherit;
+        -moz-osx-font-smoothing: inherit;
+        -webkit-appearance: none;
+        cursor: pointer;
+        outline: inherit;
 
         &:hover {
-            cursor: pointer;
+          color: #056ac8;
         }
-
-        &__item {
-            font-size: 1.1em;
-            color: rgba(0, 0, 0, 0.6);
-            font-weight: 500;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            margin: 5px;
-
-            &--selected {
-                font-size: 0.9em;
-                color: #467bbd;
-                font-weight: 500;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-                    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                margin: 5px;
-                border-radius: 20px;
-                border: 1px solid #ccd5e0;
-                padding: 10px 15px 10px 15px;
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-        }
+      }
     }
+  }
+
+  &__filter-wrapp {
+    display: flex;
+    width: 95%;
+    max-width: 1270px;
+    margin-top: 7px;
+    margin-left: 25px;
+
+    &__filter {
+      display: flex;
+      height: 20px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 100px;
+      width: auto;
+      padding: 7px 14px 7px 14px;
+      border: 1px solid #e0e3e5;
+      font-size: 0.8rem;
+      font-family: openSansSemiBold;
+      color: #455064;
+      box-shadow: 0 7px 27px 3px rgba(31, 105, 179, 0.02);
+      transition: 0.3s;
+
+      @media only screen and (max-width: 540px) {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &:hover {
+        border: 1px solid #156499;
+        box-shadow: 0 7px 27px 3px rgba(31, 105, 179, 0.1);
+      }
+
+      &__remove {
+        outline: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: white;
+        margin-left: 15px;
+        color: rgb(44, 44, 44);
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &__info {
+        display: flex;
+      }
+
+      &__icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 7px;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 6px;
+
+    @media only screen and (max-width: 300px) {
+      flex-direction: column;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__item {
+      font-size: 0.92rem;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 500;
+      font-family: openSansSemiBold;
+      margin: 12px;
+      margin-left: 0px;
+
+      &--selected {
+        font-size: 0.8rem;
+        color: #467bbd;
+        font-weight: 700;
+        font-family: openSansSemiBold;
+        margin: 5px;
+        border-radius: 20px;
+        border: 1px solid #ccd5e0;
+        padding: 8px 17px 8px 17px;
+        margin-left: 12px;
+        margin-right: 22px;
+      }
+    }
+  }
 }
