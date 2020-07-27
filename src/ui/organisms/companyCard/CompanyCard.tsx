@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { CompaniesCard } from 'ui/templates/companies/Companies';
 
 import './CompanyCard.scss';
@@ -10,7 +10,8 @@ interface Props {
 }
 
 export const CompanyCard: React.FC<Props> = ({ data }) => {
-  const Router = useRouter();
+  // const Router = useRouter();
+  // const scrollRef = useRef<HTMLDivElement>(null);
   const yearsOld = new Date().getFullYear() - data.creation_year;
 
   let imageURL = '';
@@ -18,37 +19,39 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
     imageURL = new URL(data.website).hostname;
   }
 
-  const goToCompany = () => {
-    Router.push('/company/[slug]', `/company/${data.slug}`);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <div className="results">
       <div className="results__item">
-        <button
-          className="results__item__header"
-          onClick={goToCompany}
-          type="button"
+        <Link
+          href="/company/[slug]"
+          as={`/company/${data.slug}`}
+          data-testid="link"
         >
-          {imageURL ? (
-            <img
-              className="results__item__header__avatar"
-              src={`https://account.globaldatabase.com/logo/${imageURL}/`}
-              alt=""
-            />
-          ) : (
-            <div className="results__item__header__no-avatar">
-              {data.name[0]}
+          <button
+            data-testid={`${data.slug}`}
+            className="results__item__header"
+            type="button"
+          >
+            {imageURL ? (
+              <img
+                className="results__item__header__avatar"
+                src={`https://account.globaldatabase.com/logo/${imageURL}/`}
+                alt=""
+              />
+            ) : (
+              <div className="results__item__header__no-avatar">
+                {data.name[0]}
+              </div>
+            )}
+            <div>
+              <div className="results__item__header__name">{data.name}</div>
+              <div className="results__item__header__location">
+                {data.location}
+              </div>
             </div>
-          )}
-          <div>
-            <div className="results__item__header__name">{data.name}</div>
-            <div className="results__item__header__location">
-              {data.location}
-            </div>
-          </div>
-        </button>
+          </button>
+        </Link>
+
         <div className="results__item__company-info">
           <div className="results__item__company-info__column">
             <div className="results__item__company-info__column__item">
@@ -153,21 +156,6 @@ export const CompanyCard: React.FC<Props> = ({ data }) => {
             </div>
           </div>
         </div>
-
-        {/* Datele care vin prin API nu contin founder-ul sau administratorul */}
-        {/* aici afisez doar partnerii (asta nu se cere in conditie la task) */}
-
-        {/* <div className="results__item__company-info__founder">
-          <p className="results__item__company-info__founder--key">
-            Partners of the company
-          </p>
-          {data.partners &&
-            data.partners.map((partner) => (
-              <p className="results__item__company-info__founder--value">
-                {partner}
-              </p>
-            ))}
-        </div> */}
       </div>
     </div>
   );

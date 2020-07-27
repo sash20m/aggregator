@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import { getSuggestions } from 'services/companies.services';
-import { Suggestions } from '../../../index';
+import { Suggestions } from 'index';
 
 import './SearchInput.scss';
+import Link from 'next/link';
 
 interface Props {
   suggestions: Suggestions[] | null;
@@ -42,8 +43,10 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
   }, [suggestions]);
 
   useEffect(() => {
-    if (Router.pathname.search('companies/')) {
-      setLastSearched(sessionStorage.getItem('lastSearched'));
+    if (Router) {
+      if (Router.pathname.search('companies/')) {
+        setLastSearched(sessionStorage.getItem('lastSearched'));
+      }
     }
   }, [Router]);
 
@@ -75,11 +78,6 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
     }
   };
 
-  const goToCompany = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setFocused(false);
-    Router.push('/company/[slug]', `/company/${e.currentTarget.name}`);
-  };
-
   const resetSearch = () => {
     sessionStorage.clear();
     Router.push(`/companies/all`);
@@ -89,6 +87,7 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
     <div className="search-content">
       <div className="search-content__input-wrapper">
         <input
+          data-testid="search-input"
           className={
             focused ? 'search-content__input--active' : 'search-content__input'
           }
@@ -107,6 +106,7 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
         />
         {focused && (
           <ul
+            data-testid="suggestion-items"
             className={
               specialClass
                 ? 'search-content__special-suggestions'
@@ -115,28 +115,27 @@ export const SearchInput: React.FC<Props> = ({ suggestions }) => {
             onMouseOver={mouseOverList}
             onMouseOut={mouseLeaveList}
           >
-            {!data && (
-              <p className="search-content__suggestions__loading">
-                {' '}
-                Loading...
-              </p>
-            )}
-            {data &&
+            {!data ? (
+              <p className="search-content__suggestions__loading">Loading...</p>
+            ) : (
               data.map((company: Suggestions) => (
-                <li
-                  key={company.name}
-                  className="search-content__suggestions__item"
-                >
-                  <button
-                    type="button"
-                    className="search-content__suggestions__item__button"
-                    name={company.slug}
-                    onClick={goToCompany}
+                <Link href="/company/[slug]" as={`/company/${company.slug}`}>
+                  <li
+                    key={company.name}
+                    className="search-content__suggestions__item"
                   >
-                    {`${company.name} • ${company.idno}`}
-                  </button>
-                </li>
-              ))}
+                    <button
+                      type="button"
+                      className="search-content__suggestions__item__button"
+                      name={company.slug}
+                      // onClick={goToCompany}
+                    >
+                      {`${company.name} • ${company.idno}`}
+                    </button>
+                  </li>
+                </Link>
+              ))
+            )}
           </ul>
         )}
       </div>

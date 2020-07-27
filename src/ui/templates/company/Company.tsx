@@ -56,17 +56,19 @@ export const CompanyPage: React.FC<Props> = ({ data }) => {
   const Router = useRouter();
 
   useEffect(() => {
-    const route = Router.query;
+    if (Router) {
+      const route = Router.query;
 
-    if (!data.name) {
-      Router.push('/company/[slug]', `/company/${route.slug}`);
-    } else if (data.general_data.contact_info.sites[0]) {
-      setImageURL(new URL(data.general_data.contact_info.sites[0]).hostname);
+      if (!data.name) {
+        Router.push('/company/[slug]', `/company/${route.slug}`);
+      } else if (data.general_data.contact_info.sites[0]) {
+        setImageURL(new URL(data.general_data.contact_info.sites[0]).hostname);
+      }
     }
   }, [Router, data]);
 
   return (
-    <div className="layout-company">
+    <div className="layout-company" data-testid="company">
       <HeaderBar searchVisible />
       {data.name && <CompanyInfo companyData={{ data, imageURL }} />}
     </div>

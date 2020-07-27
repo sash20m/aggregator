@@ -4,10 +4,10 @@ import './Pagination.scss';
 
 interface Props {
   pages: number;
-  onChangePage(newPage: string): void;
+  changePage(newPage: string): void;
 }
 
-export const Pagination: React.FC<Props> = ({ pages, onChangePage }) => {
+export const Pagination: React.FC<Props> = ({ pages, changePage }) => {
   const [pagesArray, setPagesArray] = useState([1, 2, 3, 4, 5, 6, 7]);
   const [firstPage, setFirstPage] = useState<number>(1);
   const [clickedPage, setClickedPage] = useState<number>(1);
@@ -29,9 +29,9 @@ export const Pagination: React.FC<Props> = ({ pages, onChangePage }) => {
   const goToPage = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       setClickedPage(parseInt(e.currentTarget.name, 10));
-      onChangePage(e.currentTarget.name);
+      changePage(e.currentTarget.name);
     },
-    [onChangePage]
+    [changePage]
   );
 
   return (
@@ -40,11 +40,13 @@ export const Pagination: React.FC<Props> = ({ pages, onChangePage }) => {
         className="pagination__arrow-btn"
         type="button"
         onClick={goOnePageBack}
+        data-testid="goOnePageBack"
       >
         {'<'}
       </button>
       {pagesArray.map((page, key) => (
         <button
+          data-testid={key}
           key={page}
           className={
             firstPage + key === clickedPage
@@ -62,6 +64,7 @@ export const Pagination: React.FC<Props> = ({ pages, onChangePage }) => {
         className="pagination__arrow-btn"
         type="button"
         onClick={goOnePageFuther}
+        data-testid="goOnePageFurther"
       >
         {'>'}
       </button>

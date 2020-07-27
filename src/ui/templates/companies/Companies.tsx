@@ -23,7 +23,6 @@ export interface CompaniesCard {
   phone: boolean | null;
   email: boolean | null;
   creation_year: number;
-  partners: [];
 }
 
 export interface Companies {
@@ -47,7 +46,7 @@ export const CompaniesList: React.FC<Props> = ({ companyName, data }) => {
     onSetData();
   }, [data]);
 
-  const onChangePage = async (newPage: string) => {
+  const changePage = async (newPage: string) => {
     const companiesData = await getCompanies(companyName, newPage, 10);
     setCompanies(companiesData);
   };
@@ -55,7 +54,7 @@ export const CompaniesList: React.FC<Props> = ({ companyName, data }) => {
   if (!companies) return <></>;
 
   return (
-    <div className="layout-companies">
+    <div className="layout-companies" data-testid="companies-list">
       <HeaderBar searchVisible={false} />
       <div className="layout-companies__search-area-small">
         <div className="layout-companies__search-wrapper">
@@ -64,14 +63,14 @@ export const CompaniesList: React.FC<Props> = ({ companyName, data }) => {
       </div>
       <div className="nr-results-layout">
         <img className="nr-results-layout__bag-case" src="../bag.png" alt="" />
-        <p>{companies.total_results}</p>
+        <p data-testid="total-results">{companies.total_results}</p>
         <p>of results</p>
       </div>
       {companies &&
         companies.data.map((companyInfo: CompaniesCard) => (
           <CompanyCard data={companyInfo} key={companyInfo.name} />
         ))}
-      <Pagination pages={companies.pages} onChangePage={onChangePage} />
+      <Pagination pages={companies.pages} changePage={changePage} />
     </div>
   );
 };

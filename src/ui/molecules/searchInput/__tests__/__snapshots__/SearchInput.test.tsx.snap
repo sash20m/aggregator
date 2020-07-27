@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`searchInput should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="search-content"
+  >
+    <div
+      class="search-content__input-wrapper"
+    >
+      <input
+        class="search-content__input"
+        data-testid="search-input"
+        placeholder="Search from 225,195 companies"
+        type="text"
+        value=""
+      />
+      <img
+        alt=""
+        class="search-content__search-magnifier"
+        src="../search.png"
+      />
+    </div>
+    <div
+      class="search-content__options"
+    >
+      <p
+        class="search-content__options__item"
+      >
+        Search In
+      </p>
+      <p
+        class="search-content__options__item--selected"
+      >
+        Companies
+      </p>
+      <p
+        class="search-content__options__item"
+      >
+        Persons
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

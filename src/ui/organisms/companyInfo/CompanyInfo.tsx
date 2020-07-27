@@ -18,7 +18,7 @@ interface Props {
 export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
   const { data, imageURL } = companyData;
   return (
-    <div className="company-content">
+    <div className="company-content" data-testid="company-content">
       <div className="header">
         <div className="header__content">
           {imageURL ? (
@@ -32,7 +32,9 @@ export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
           )}
 
           <div className="header__info">
-            <div className="header__info__name">{data.name}</div>
+            <div className="header__info__name" data-testid="company-name">
+              {data.name}
+            </div>
             <div className="header__info__industry">{data.status.title}</div>
           </div>
         </div>
@@ -97,7 +99,10 @@ export const CompanyInfo: React.FC<Props> = ({ companyData }) => {
                     alt="phone"
                   />
 
-                  <div className="company-info__footer-info__contact__row--item__value__results">
+                  <div
+                    className="company-info__footer-info__contact__row--item__value__results"
+                    data-testid="phone"
+                  >
                     {data.general_data.contact_info.phones.length !== 0
                       ? data.general_data.contact_info.phones.map(
                           (item, key) => <p key={key}>Phone</p>

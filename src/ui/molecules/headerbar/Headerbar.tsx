@@ -65,18 +65,17 @@ export const HeaderBar = ({ searchVisible }: Props): JSX.Element => {
     sessionStorage.clear();
   };
 
-  const goToCompany = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setFocused(false);
-    Router.push('/company/[slug]', `/company/${e.currentTarget.name}`);
-  };
-
   const showAllCompanies = () => {
     setFocused(false);
     Router.push('/companies/all');
   };
 
+  const resetSuggestionList = () => {
+    setFocused(false);
+  };
+
   return (
-    <div className="header-main">
+    <div className="header-main" data-testid="headerbar">
       <div className="header-main__content">
         <Link href="/">
           <button
@@ -120,19 +119,24 @@ export const HeaderBar = ({ searchVisible }: Props): JSX.Element => {
 
                 {data &&
                   data.map((company: Suggestions) => (
-                    <li
-                      key={company.name}
-                      className="search__suggestions__item"
+                    <Link
+                      href="/company/[slug]"
+                      as={`/company/${company.slug}`}
                     >
-                      <button
-                        type="button"
-                        className="search__suggestions__item__button"
-                        name={company.slug}
-                        onClick={goToCompany}
+                      <li
+                        key={company.name}
+                        className="search__suggestions__item"
                       >
-                        {company.name}
-                      </button>
-                    </li>
+                        <button
+                          type="button"
+                          className="search__suggestions__item__button"
+                          name={company.slug}
+                          onClick={resetSuggestionList}
+                        >
+                          {company.name}
+                        </button>
+                      </li>
+                    </Link>
                   ))}
               </ul>
             )}

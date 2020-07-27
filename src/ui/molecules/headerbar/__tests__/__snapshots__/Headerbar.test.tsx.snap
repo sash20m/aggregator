@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`headerbar should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="header-main"
+    data-testid="headerbar"
+  >
+    <div
+      class="header-main__content"
+    >
+      <button
+        class="logo__btn"
+        type="button"
+      >
+        <img
+          alt="Logo"
+          class="logo"
+          src="../logo-small.png"
+        />
+      </button>
+      <div
+        class="search"
+      >
+        <img
+          alt=""
+          class="search__icon"
+          src="../search.png"
+        />
+        <input
+          class="search__input"
+          placeholder="Search from 225,195 companies"
+          type="text"
+          value=""
+        />
+        <button
+          class="search__show-all"
+          type="button"
+        >
+          Show All
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
